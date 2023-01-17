@@ -9,11 +9,12 @@ public class GameTest {
 		int wins = 0;
 		int loses = 0;
 		
-		int total_game_number;
+		int total_game_number; // 최대 게임 횟수
 		
-		if (N == 1) {total_game_number = 5;} // 입력에 따른 전체 게임 횟수 설정
-		else if (N == 2) {total_game_number = 3;}
-		else {total_game_number = 1;}
+		// 입력에 따른 전체 게임 횟수 설정
+		if (N == 1) {total_game_number = 5;} // 1 -> 5판  
+		else if (N == 2) {total_game_number = 3;} // 2-> 3판
+		else {total_game_number = 1;} // 3-> 단판
 		
 		int winlose = total_game_number/2+1; // 5판 -> 3선승 , 3판 -> 2선승...
 		
@@ -38,7 +39,7 @@ public class GameTest {
 			if (wins==winlose) {System.out.println("###사용자 승!!!"); break;}
 			else if (loses==winlose) {System.out.println("###컴퓨터 승!!!"); break;}
 			
-			// 게임 횟수 1회 감소
+			// 게임 잔여횟수 1회 감소
 			total_game_number--;
 			}
 	}
