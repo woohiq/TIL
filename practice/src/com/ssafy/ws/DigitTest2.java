@@ -1,22 +1,23 @@
 package com.ssafy.ws;
+
 public class DigitTest2 {
-	public static void main2(String[] args) {
+	public static void main(String[] args) {
 		int num = 1;
 		for (int i = 0; i<5; i++ ) {
 			
 			// (5-Math.abs(4-2*i)+1) = 5, 3, 1, 3, 5 ...
-			for (int k = 1; k<(5-Math.abs(4-2*i)+1)/2;k++) { 
-				System.out.print("   ");
+			for (int k = 1; k<=(5-Math.abs(4-2*i))/2;k++) { 
+				System.out.printf("%3s","");
 			}
 			
-			for (int j = 0; j<Math.abs(4-2*i)+1; j++) {
-				System.out.printf("%2d ",num);
+			for (int j = 0; j<=Math.abs(4-2*i); j++) {
+				System.out.printf("%3d",num);
 				num++;
 			}
 			System.out.println("");
 		}
 	}
-	public static void main(String[] args) {
+	public static void main2(String[] args) {
 		int cnt = 1; // 숫자출력
 		int blank = 0; // 공백출력
 		boolean isIncrease = true;

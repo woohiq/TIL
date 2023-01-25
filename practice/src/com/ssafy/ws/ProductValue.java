@@ -1,4 +1,4 @@
-package com.ssafy.ws.step2;
+package com.ssafy.ws;
 import java.io.*;
 import java.util.Arrays;
 public class ProductValue {

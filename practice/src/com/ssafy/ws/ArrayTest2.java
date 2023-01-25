@@ -1,4 +1,4 @@
-package com.ssafy.ws.step2;
+package com.ssafy.ws;
 import java.io.*;
 public class ArrayTest2 {
 	public static void main(String[] args) throws IOException{
