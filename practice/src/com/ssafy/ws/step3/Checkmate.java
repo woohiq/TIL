@@ -3,7 +3,7 @@ package com.ssafy.ws.step3;
 import java.util.Scanner;
 
 public class Checkmate {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Scanner sc = new Scanner(System.in);
 		// 테스트 케이스 수 입력받음
 		int test_case = sc.nextInt();
