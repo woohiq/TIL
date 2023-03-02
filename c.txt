@@ -1,4 +1,0 @@
-for test
-one
-two
-three
