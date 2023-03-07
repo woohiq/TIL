@@ -1,0 +1,43 @@
+package swtest;
+
+import java.util.Scanner;
+
+public class Po {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int t = sc.nextInt();
+		for(int tc = 1; tc <= t; tc++) {
+			int n = sc.nextInt();
+			
+			// 해당 위치의 알이 한 번이라도 잡혔으면 true
+			boolean[][] isDeadOnce = new boolean[n][n];
+			
+			boolean[][] isAl = new boolean[n][n];
+			// 포의 현재 위치
+			int[] po = new int[2];
+			
+			for(int r = 0; r < n; r++) {
+				for(int c = 0; c < n; c++) {
+					int num = sc.nextInt();
+					
+					if(num == 1) {
+						isAl[r][c] = true;
+					} else if(num == 2) {
+						po[0] = r;
+						po[1] = c;
+					}
+				}
+			}
+			
+			for(int rr = 0; rr < n; rr++) {
+				for(int cc = 0; cc < n; cc++) {
+					System.out.print((isAl[rr][cc] ? 1 : 0) + " ");
+				}
+				System.out.println();
+			}
+			
+			System.out.println(po[0] + " " + po[1]);
+		}
+	}
+}

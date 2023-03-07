@@ -1,0 +1,45 @@
+package swtest;
+
+import java.util.Scanner;
+
+public class Apple {
+	static int n;
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int t = sc.nextInt();
+		
+		for(int tc = 1; tc <= t; tc++) {
+			n = sc.nextInt();
+			
+			int[][] map = new int[n][n];
+			
+			for(int i = 0; i < n; i++) {
+				for(int j = 0; j < n; j++) {
+					map[i][j] = sc.nextInt();
+				}
+			}
+			
+			map = rotate(map);
+			
+			for(int rr = 0; rr < n; rr++) {
+				for(int cc = 0; cc < n; cc++) {
+					System.out.print(map[rr][cc] + " ");
+				}
+				System.out.println();
+			}
+		}
+	}
+	
+	static int[][] rotate(int[][] map) {
+		int[][] rotated = new int[n][n];
+		
+		for(int i = 0; i < n; i++) {
+			for(int j = 0; j < n; j++) {
+				rotated[i][j] = map[j][n-1-i];
+			}
+		}
+		
+		return rotated;
+	}
+}

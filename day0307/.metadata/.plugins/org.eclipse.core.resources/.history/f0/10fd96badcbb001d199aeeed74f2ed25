@@ -1,0 +1,7 @@
+package swtest;
+
+public class BuildTest {
+	public static void main(String[] args) {
+		System.out.println("Hello SSAFY");
+	}
+}

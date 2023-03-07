@@ -1,0 +1,97 @@
+package swtest;
+
+import java.util.Scanner;
+
+public class Apple {
+	static int n;
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int t = sc.nextInt();
+		
+		for(int tc = 1; tc <= t; tc++) {
+			n = sc.nextInt();
+			
+			int[][] map = new int[n][n];
+			// 사과의 개수
+			int m = 0;
+			
+			// 시작했을 때 현재 위치 (앞으로 한 칸 이동하면서 시작함)
+			int r = 0;
+			int c = 1;
+			
+			for(int i = 0; i < n; i++) {
+				for(int j = 0; j < n; j++) {
+					map[i][j] = sc.nextInt();
+					
+					// 사과이면 개수 + 1
+					if(map[i][j] != 0) {
+						m++;
+					}
+				}
+			}
+			
+			int turnCnt = 0;
+			// 사과 번호 하나씩 증가시키면서 회전 수 계산
+			for(int appleNum = 1; appleNum <= m; appleNum++) {
+				// 사과가 현재 위치 기준으로 몇 사분면인지 확인
+				curApple:
+				for(int nr = 0; nr < n; nr++) {
+					for(int nc = 0; nc < n; nc++) {
+						
+						// 사과를 찾았으면
+						if(map[nr][nc] == appleNum) {
+							// 몇번회전해야하는지 확인
+							// 회전을 3번 해야하는 사분면
+							if(nr < r) {
+								turnCnt += 3;
+								r = nr;
+								c = nc;
+								// 3번 다시 반시계로 회전
+								map = rotate(rotate(rotate(map)));
+							} else if(nr > n && nc < c) {
+								turnCnt += 2;
+								r = nr;
+								c = nc;
+								
+								// 2번 다시 반시계로 회전
+								map = rotate(rotate(map));
+							} else if(nr > n && nc >= c) {
+								turnCnt += 1;
+								r = nr;
+								c = nc;
+								
+								map = rotate(map);
+							}
+							
+
+							System.out.println(appleNum + "번 사과 확인");
+							for(int i = 0; i < n; i++) {
+								for(int j = 0; j < n; j++) {
+									System.out.print(map[i][j] + " ");
+								}
+								System.out.println();
+							}
+							
+							break curApple;
+						}
+					}
+				}
+			}
+			
+			System.out.println(turnCnt);
+		}
+	}
+	
+	static int[][] rotate(int[][] map) {
+		int[][] rotated = new int[n][n];
+		
+		for(int i = 0; i < n; i++) {
+			for(int j = 0; j < n; j++) {
+				rotated[i][j] = map[j][n-1-i];
+			}
+		}
+		
+		return rotated;
+	}
+}

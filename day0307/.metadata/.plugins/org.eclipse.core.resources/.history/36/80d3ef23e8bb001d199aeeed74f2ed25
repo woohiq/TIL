@@ -1,0 +1,118 @@
+package swtest;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Po {
+	static int[] dx = {-1,1,0,0};
+	static int[] dy = {0,0,-1,1};
+	
+	static int n;
+	
+	static boolean[][] isDeadOnce;
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int t = sc.nextInt();
+		for(int tc = 1; tc <= t; tc++) {
+			n = sc.nextInt();
+			
+			// 해당 위치의 알이 한 번이라도 잡혔으면 true
+			isDeadOnce = new boolean[n][n];
+			
+			boolean[][] isAl = new boolean[n][n];
+			// 포의 현재 위치
+			int[] po = new int[2];
+			
+			for(int r = 0; r < n; r++) {
+				for(int c = 0; c < n; c++) {
+					int num = sc.nextInt();
+					
+					if(num == 1) {
+						isAl[r][c] = true;
+					} else if(num == 2) {
+						po[0] = r;
+						po[1] = c;
+					}
+				}
+			}
+			
+			for(int rr = 0; rr < n; rr++) {
+				for(int cc = 0; cc < n; cc++) {
+					System.out.print((isAl[rr][cc] ? 1 : 0) + " ");
+				}
+				System.out.println();
+			}
+			
+			System.out.println(po[0] + " " + po[1]);
+			
+			bt(0, po[0], po[1], isAl);
+			
+			
+		}
+	}
+	
+	static void bt(int k, int r, int c, boolean[][] map) {
+		// 3번 이동했으면 종료
+		if(k == 1) {
+			// 이동횟수를 모두 사용했을 경우
+			System.out.println("이동 횟수를 모두 사용하고 남은 알");
+			for(int rr = 0; rr < n; rr++) {
+				for(int cc = 0; cc < n; cc++) {
+					System.out.print((map[rr][cc] ? 1 : 0) + " ");
+				}
+				System.out.println();
+			}
+			
+			return;
+		}
+		
+		// 4 방향으로 탐색하면서 이동할 수 있는 위치로 이동
+		for(int dir = 0; dir < 4; dir++) {
+			// 하나의 알을 건너 뛰었는지
+			boolean isJumped = false;
+			
+			int nr = r + dx[dir];
+			int nc = c + dy[dir];
+			
+			// 맵 밖이 아닐 때까지
+			while(0 <= nr && nr < n && 0 <= nc && nc < n) {
+				// 알 하나를 건너 뛰면 다른 알을 만날때까지 모두 이동할 수 있는 곳이다.
+				if(isJumped) {
+					// 다른 알을 잡았을 경우
+					if(map[nr][nc]) {
+						boolean[][] newMap = new boolean[n][];
+						for(int i = 0; i < n; i++) {
+							newMap[i] = Arrays.copyOf(map[i], n);
+						}
+						
+						// 포를 죽은 것으로 변경
+						newMap[nr][nc] = false;
+						// 한 번이라도 잡혔으므로 체크
+						isDeadOnce[nr][nc] = true;
+						
+						bt(k + 1, nr, nc, newMap);
+						
+						// 이동 종료
+						break;
+					// 그냥 빈 칸으로 이동할 경우
+					} else {
+						bt(k + 1, nr, nc, map);
+					}
+					
+				// 아직 알을 한 번도 만나지 않았으면
+				} else {
+					// 현재 보고 있는 위치가 알이면 
+					if(map[nr][nc]) {
+						isJumped = true;
+					}
+				}
+				
+				nr += dx[dir];
+				nc += dy[dir];
+			}
+		}
+		
+	}
+}
